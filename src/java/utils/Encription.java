@@ -1,11 +1,10 @@
 package utils;
 
-import com.sun.istack.logging.Logger;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
-import sun.util.logging.PlatformLogger;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,19 +23,25 @@ public class Encription {
     }
     
     public String getEncriptionPass(String password){
+    
+        try{
         
-        
-        try {
             MessageDigest m;
             m = MessageDigest.getInstance("SHA-256");
             m.update(password.getBytes(),0,password.length());
             return new BigInteger(1,m.digest()).toString(16);
-        } catch (NoSuchAlgorithmException ex) {
-            java.util.logging.Logger.getLogger(Encription.class.getName()).log(Level.SEVERE, "Не поддерживается алгоритм шифрования", ex);
+        
+        } catch (NoSuchAlgorithmException ex){
+        
+            Logger.getLogger(Encription.class.getName())
+                    .log(Level.SEVERE, "Не поддерживается алгортм шифрования", ex);
             return null;
+        
         }
-        
-        
-       
+    
+    }
+
+    public String getEcnriptionPass(String oldPassword) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
